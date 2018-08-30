@@ -1,7 +1,7 @@
 # Bitwise permission
 [![Build Status](https://api.travis-ci.org/Whaxion/bitwise.svg?branch=master)](https://travis-ci.org/Whaxion/bitwise)
 
-A bitwise permission library
+A bitwise permission library in Crystal
 
 ## Installation
 
