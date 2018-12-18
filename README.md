@@ -1,5 +1,5 @@
 # Bitwise permission
-[![Build Status](https://api.travis-ci.org/Whaxion/bitwise.svg?branch=master)](https://travis-ci.org/Whaxion/bitwise)
+[![Build Status](https://api.travis-ci.org/BecauseOfProg/bitwise.svg?branch=master)](https://travis-ci.org/BecauseOfProg/bitwise)
 
 A bitwise permission library in Crystal
 
@@ -10,7 +10,7 @@ Add this to your application's `shard.yml`:
 ```yaml
 dependencies:
   bitwise:
-    github: Whaxion/bitwise
+    github: BecauseOfProg/bitwise
 ```
 
 ## Usage
@@ -40,7 +40,7 @@ perms2.to_a # [0, 1]
 
 ## Contributing
 
-1. Fork it (<https://github.com/Whaxion/bitwise/fork>)
+1. Fork it (<https://github.com/BecauseOfProg/bitwise/fork>)
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
