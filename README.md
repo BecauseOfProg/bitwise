@@ -1,8 +1,8 @@
 <div align="center">
   <h1>Bitwise permission</h1>
   <h3>A bitwise permission library in Crystal</h3>
-  <a href="https://travis-ci.org/BecauseOfProg/bitwise">
-    <img src="https://api.travis-ci.org/BecauseOfProg/bitwise.svg?branch=master" alt="Build status" />
+  <a href="https://circleci.com/gh/BecauseOfProg/bitwise">
+    <img src="https://circleci.com/gh/BecauseOfProg/bitwise.svg?style=svg" alt="Build status" />
   </a>
 </div>
 
