@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.30.0">
+
+
+<link href="../css/style.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="../js/doc.js"></script>
+<script type="text/javascript">
+  CrystalDoc.base_path = "../";
+</script>
+
+  <meta id="repository-name" content="github.com/BecauseOfProg/bitwise">
+  <title>Bitwise::Permissions - github.com/BecauseOfProg/bitwise</title>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="repository-links">
+      <a href="../index.html">README</a>
+    </div>
+  </div>
+
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class="parent open current" data-id="github.com/BecauseOfProg/bitwise/Bitwise" data-name="bitwise">
+      <a href="../Bitwise.html">Bitwise</a>
+      
+        <ul>
+  
+  <li class=" current" data-id="github.com/BecauseOfProg/bitwise/Bitwise/Permissions" data-name="bitwise::permissions">
+      <a href="../Bitwise/Permissions.html">Permissions</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">class</span> Bitwise::Permissions
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Bitwise/Permissions.html">Bitwise::Permissions</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+
+
+
+
+  <h2>Overview</h2>
+
+  <p>A library to handle permissions bitwisely
+Example:</p>
+
+<pre><code class="language-require "bitwise"">
+class Permissions &lt; Bitwise::Permissions
+ READ = 0
+ WRITE = 1
+ EDIT = 2
+ DELETE = 3
+end
+
+perms = Permissions.new(Permissions::READ, Permissions::WRITE)
+
+perms.has_perm Permissions::READ # true
+perms.has_perm Permissions::DELETE # false
+
+perms.add_perm Permissions::DELETE
+perms.has_perm Permissions::DELETE # true
+
+perms.del_perm Permissions::DELETE
+perms.has_perm Permissions::DELETE # false
+
+perms.to_i #=> 3 | (bitwise value, easier to store)
+
+perms2 = Permission.new(3)
+perms2.to_a #=> [0, 1] | (READ, WRITE)</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>Defined in:</h2>
+  
+    
+      <a href="https://github.com/BecauseOfProg/bitwise/blob/0b3c0bf4817a11ea69833cbbe4ee7d4279d0a534/src/bitwise/permissions.cr#L30" target="_blank">
+        bitwise/permissions.cr
+      </a>
+    
+    <br/>
+  
+
+
+
+
+
+  <h2>Constructors</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new(bitwise:Int)-class-method" class="signature"><strong>.new</strong>(bitwise : Int)</a>
+        
+          <div class="summary"><p>Create instance with bitwise value Example: <code></code>`require "bitwise"</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new(*perms:Int)-class-method" class="signature"><strong>.new</strong>(*perms : Int)</a>
+        
+          <div class="summary"><p>Create instance with permission constant Example: <code></code>`require "bitwise"</p></div>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+  <h2>Instance Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#add_perm(perm:Int)-instance-method" class="signature"><strong>#add_perm</strong>(perm : Int)</a>
+        
+          <div class="summary"><p>Add permission to instance Example: <code></code>`require "bitwise"</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#bitwise:Int32-instance-method" class="signature"><strong>#bitwise</strong> : Int32</a>
+        
+          <div class="summary"><p>Return bitwise value Example: <code></code>`require "bitwise"</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#bitwise_value:Int32-instance-method" class="signature"><strong>#bitwise_value</strong> : Int32</a>
+        
+          <div class="summary"><p>Return bitwise value Example: <code></code>`require "bitwise"</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#del_perm(perm:Int)-instance-method" class="signature"><strong>#del_perm</strong>(perm : Int)</a>
+        
+          <div class="summary"><p>Remove permission to instance Example: <code></code>`require "bitwise"</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#has_perm(perm:Int)-instance-method" class="signature"><strong>#has_perm</strong>(perm : Int)</a>
+        
+          <div class="summary"><p>Check if instance has the perm Example: <code></code>`require "bitwise"</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#to_a:Array(Int32)-instance-method" class="signature"><strong>#to_a</strong> : Array(Int32)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#to_i:Int32-instance-method" class="signature"><strong>#to_i</strong> : Int32</a>
+        
+          <div class="summary"><p>Return bitwise value Example: <code></code>`require "bitwise"</p></div>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+</div>
+
+
+  <h2>Constructor Detail</h2>
+  
+    <div class="entry-detail" id="new(bitwise:Int)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(bitwise : Int)
+
+        <a class="method-permalink" href="#new(bitwise:Int)-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Create instance with bitwise value
+Example:</p>
+
+<pre><code class="language-require "bitwise"">
+class Permissions &lt; Bitwise::Permissions
+ READ = 0
+ WRITE = 1
+ EDIT = 2
+ DELETE = 3
+end
+
+perms = Permissions.new(3) # Has perm READ and WRITE</code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/BecauseOfProg/bitwise/blob/0b3c0bf4817a11ea69833cbbe4ee7d4279d0a534/src/bitwise/permissions.cr#L74" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new(*perms:Int)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(*perms : Int)
+
+        <a class="method-permalink" href="#new(*perms:Int)-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Create instance with permission constant
+Example:</p>
+
+<pre><code class="language-require "bitwise"">
+class Permissions &lt; Bitwise::Permissions
+ READ = 0
+ WRITE = 1
+ EDIT = 2
+ DELETE = 3
+end
+
+perms = Permissions.new(Permissions::READ, Permissions::WRITE) # Has perm READ and WRITE</code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/BecauseOfProg/bitwise/blob/0b3c0bf4817a11ea69833cbbe4ee7d4279d0a534/src/bitwise/permissions.cr#L45" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+
+  <h2>Instance Method Detail</h2>
+  
+    <div class="entry-detail" id="add_perm(perm:Int)-instance-method">
+      <div class="signature">
+        
+        def <strong>add_perm</strong>(perm : Int)
+
+        <a class="method-permalink" href="#add_perm(perm:Int)-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Add permission to instance
+Example:</p>
+
+<pre><code class="language-require "bitwise"">
+class Permissions &lt; Bitwise::Permissions
+ READ = 0
+ WRITE = 1
+ EDIT = 2
+ DELETE = 3
+end
+
+perms = Permissions.new(Permissions::READ, Permissions::WRITE)
+
+perms.add_perm Permissions::DELETE # Add the permission DELETE to the instance</code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/BecauseOfProg/bitwise/blob/0b3c0bf4817a11ea69833cbbe4ee7d4279d0a534/src/bitwise/permissions.cr#L127" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="bitwise:Int32-instance-method">
+      <div class="signature">
+        
+        def <strong>bitwise</strong> : Int32
+
+        <a class="method-permalink" href="#bitwise:Int32-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Return bitwise value
+Example:</p>
+
+<pre><code class="language-require "bitwise"">
+class Permissions &lt; Bitwise::Permissions
+ READ = 0
+ WRITE = 1
+ EDIT = 2
+ DELETE = 3
+end
+
+perms = Permissions.new(Permissions::READ, Permissions::WRITE)
+
+perms.bitwise #=> 3 # (bitwise value)</code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/BecauseOfProg/bitwise/blob/0b3c0bf4817a11ea69833cbbe4ee7d4279d0a534/src/bitwise/permissions.cr#L194" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="bitwise_value:Int32-instance-method">
+      <div class="signature">
+        
+        def <strong>bitwise_value</strong> : Int32
+
+        <a class="method-permalink" href="#bitwise_value:Int32-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Return bitwise value
+Example:</p>
+
+<pre><code class="language-require "bitwise"">
+class Permissions &lt; Bitwise::Permissions
+ READ = 0
+ WRITE = 1
+ EDIT = 2
+ DELETE = 3
+end
+
+perms = Permissions.new(Permissions::READ, Permissions::WRITE)
+
+perms.bitwise_value #=> 3 # (bitwise value)</code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/BecauseOfProg/bitwise/blob/0b3c0bf4817a11ea69833cbbe4ee7d4279d0a534/src/bitwise/permissions.cr#L213" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="del_perm(perm:Int)-instance-method">
+      <div class="signature">
+        
+        def <strong>del_perm</strong>(perm : Int)
+
+        <a class="method-permalink" href="#del_perm(perm:Int)-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Remove permission to instance
+Example:</p>
+
+<pre><code class="language-require "bitwise"">
+class Permissions &lt; Bitwise::Permissions
+ READ = 0
+ WRITE = 1
+ EDIT = 2
+ DELETE = 3
+end
+
+perms = Permissions.new(Permissions::READ, Permissions::WRITE)
+
+perms.del_perm Permissions::WRITE # Remove the permission WRITE to the instance</code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/BecauseOfProg/bitwise/blob/0b3c0bf4817a11ea69833cbbe4ee7d4279d0a534/src/bitwise/permissions.cr#L149" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="has_perm(perm:Int)-instance-method">
+      <div class="signature">
+        
+        def <strong>has_perm</strong>(perm : Int)
+
+        <a class="method-permalink" href="#has_perm(perm:Int)-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Check if instance has the perm
+Example:</p>
+
+<pre><code class="language-require "bitwise"">
+class Permissions &lt; Bitwise::Permissions
+ READ = 0
+ WRITE = 1
+ EDIT = 2
+ DELETE = 3
+end
+
+perms = Permissions.new(Permissions::READ, Permissions::WRITE)
+
+perms.has_perm Permissions::READ # true
+perms.has_perm Permissions::DELETE # false```</code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/BecauseOfProg/bitwise/blob/0b3c0bf4817a11ea69833cbbe4ee7d4279d0a534/src/bitwise/permissions.cr#L104" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="to_a:Array(Int32)-instance-method">
+      <div class="signature">
+        
+        def <strong>to_a</strong> : Array(Int32)
+
+        <a class="method-permalink" href="#to_a:Array(Int32)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/BecauseOfProg/bitwise/blob/0b3c0bf4817a11ea69833cbbe4ee7d4279d0a534/src/bitwise/permissions.cr#L217" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="to_i:Int32-instance-method">
+      <div class="signature">
+        
+        def <strong>to_i</strong> : Int32
+
+        <a class="method-permalink" href="#to_i:Int32-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Return bitwise value
+Example:</p>
+
+<pre><code class="language-require "bitwise"">
+class Permissions &lt; Bitwise::Permissions
+ READ = 0
+ WRITE = 1
+ EDIT = 2
+ DELETE = 3
+end
+
+perms = Permissions.new(Permissions::READ, Permissions::WRITE)
+
+perms.to_i #=> 3 # (bitwise value)</code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/BecauseOfProg/bitwise/blob/0b3c0bf4817a11ea69833cbbe4ee7d4279d0a534/src/bitwise/permissions.cr#L171" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+</div>
+
+</body>
+</html>
