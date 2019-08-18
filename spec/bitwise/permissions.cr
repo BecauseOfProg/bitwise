@@ -52,11 +52,34 @@ describe Bitwise::Permissions do
     end
   end
 
+  describe "#has_perms" do
+    it "should be true" do
+      perms.has_perms(Permissions::READ, Permissions::WRITE).should be_true
+    end
+    it "should be false" do
+      perms.has_perms(Permissions::READ, Permissions::DELETE).should be_false
+    end
+    it "should raise an error" do
+      begin
+        perms.has_perms(4, 5)
+        false.should be_true
+      rescue ArgumentError
+        true.should be_true
+      end
+    end
+  end
+
   describe "#add_perm" do
     it "should add perm" do
       perms.has_perm(Permissions::DELETE).should be_false
       perms.add_perm(Permissions::DELETE)
       perms.has_perm(Permissions::DELETE).should be_true
+    end
+
+    it "should add perm (strict)" do
+      perms.has_perm(Permissions::EDIT).should be_false
+      perms.add_perm(Permissions::EDIT, strict: true)
+      perms.has_perm(Permissions::EDIT).should be_true
     end
 
     it "should raise an error" do
@@ -67,18 +90,103 @@ describe Bitwise::Permissions do
         true.should be_true
       end
     end
+
+    it "should raise an error (strict)" do
+      perms.has_perm(Permissions::EDIT).should be_true
+      begin
+        perms.add_perm(Permissions::EDIT, strict: true)
+        false.should be_true
+      rescue ArgumentError
+        true.should be_true
+      end
+    end
   end
 
   describe "#del_perm" do
-    it "should add perm" do
+    it "should del perm" do
       perms.has_perm(Permissions::DELETE).should be_true # Added in last test
       perms.del_perm(Permissions::DELETE)
       perms.has_perm(Permissions::DELETE).should be_false
     end
 
+    it "should del perm (strict)" do
+      perms.has_perm(Permissions::EDIT).should be_true # Added in last test
+      perms.del_perm(Permissions::EDIT, strict: true)
+      perms.has_perm(Permissions::EDIT).should be_false
+    end
+
     it "should raise an error" do
       begin
-        perms.add_perm(4)
+        perms.del_perm(4)
+        false.should be_true
+      rescue ArgumentError
+        true.should be_true
+      end
+    end
+
+    it "should raise an error (strict)" do
+      perms.has_perm(Permissions::EDIT).should be_false
+      begin
+        perms.del_perm(Permissions::EDIT, strict: true)
+        false.should be_true
+      rescue ArgumentError
+        true.should be_true
+      end
+    end
+  end
+
+  describe "#add_perms" do
+    it "should add multiple perms" do
+      perms.has_perm(Permissions::EDIT).should be_false
+      perms.has_perm(Permissions::DELETE).should be_false
+      perms.add_perms(Permissions::EDIT, Permissions::DELETE)
+      perms.has_perm(Permissions::EDIT).should be_true
+      perms.has_perm(Permissions::DELETE).should be_true
+    end
+
+    it "should raise an error" do
+      begin
+        perms.add_perms(4, 5)
+        false.should be_true
+      rescue ArgumentError
+        true.should be_true
+      end
+    end
+
+    it "should raise an error (strict)" do
+      perms.has_perm(Permissions::EDIT).should be_true
+      perms.has_perm(Permissions::DELETE).should be_true
+      begin
+        perms.add_perms(Permissions::EDIT, Permissions::DELETE, strict: true)
+        false.should be_true
+      rescue ArgumentError
+        true.should be_true
+      end
+    end
+  end
+
+  describe "#del_perms" do
+    it "should del multiple perms" do
+      perms.has_perm(Permissions::EDIT).should be_true # Added in last test
+      perms.has_perm(Permissions::DELETE).should be_true
+      perms.del_perms(Permissions::EDIT, Permissions::DELETE)
+      perms.has_perm(Permissions::EDIT).should be_false
+      perms.has_perm(Permissions::DELETE).should be_false
+    end
+
+    it "should raise an error" do
+      begin
+        perms.del_perms(4, 5)
+        false.should be_true
+      rescue ArgumentError
+        true.should be_true
+      end
+    end
+
+    it "should raise an error (strict)" do
+      perms.has_perm(Permissions::EDIT).should be_false
+      begin
+        perms.del_perms(Permissions::EDIT, Permissions::DELETE, strict: true)
         false.should be_true
       rescue ArgumentError
         true.should be_true
