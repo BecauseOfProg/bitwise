@@ -52,13 +52,59 @@ describe Bitwise::Permissions do
     end
   end
 
-  describe "#to_i" do
+  describe "#add_perm" do
+    it "should add perm" do
+      perms.has_perm(Permissions::DELETE).should be_false
+      perms.add_perm(Permissions::DELETE)
+      perms.has_perm(Permissions::DELETE).should be_true
+    end
+
+    it "should raise an error" do
+      begin
+        perms.add_perm(4)
+        false.should be_true
+      rescue ArgumentError
+        true.should be_true
+      end
+    end
+  end
+
+  describe "#del_perm" do
+    it "should add perm" do
+      perms.has_perm(Permissions::DELETE).should be_true # Added in last test
+      perms.del_perm(Permissions::DELETE)
+      perms.has_perm(Permissions::DELETE).should be_false
+    end
+
+    it "should raise an error" do
+      begin
+        perms.add_perm(4)
+        false.should be_true
+      rescue ArgumentError
+        true.should be_true
+      end
+    end
+  end
+
+  describe "#to_i (doesn't work if #add_perm or #del_perm failed)" do
     it "should return bitwise" do
       perms.to_i.should eq 3
     end
   end
 
-  describe "#to_a" do
+  describe "#bitwise (doesn't work if #add_perm or #del_perm failed)" do
+    it "should return bitwise" do
+      perms.bitwise.should eq 3
+    end
+  end
+
+  describe "#bitwise_value (doesn't work if #add_perm or #del_perm failed)" do
+    it "should return bitwise" do
+      perms.bitwise_value.should eq 3
+    end
+  end
+
+  describe "#to_a (doesn't work if #add_perm or #del_perm failed)" do
     it "should return array of perms" do
       perms.to_a.should eq [0, 1]
     end
