@@ -24,6 +24,7 @@ dependencies:
 
 ## Usage
 Documentation <a href="https://becauseofprog.github.io/bitwise/">here</a>
+More examples in the documentation
 
 Better explained by example
 
@@ -52,6 +53,8 @@ perms.to_i #=> 3 | (bitwise value, easier to store)
 
 perms2 = Permission.new(3)
 perms2.to_a #=> [0, 1] | (READ, WRITE)
+
+# More examples in the documentation
 ```
 
 ## Contributing
