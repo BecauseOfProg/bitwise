@@ -23,6 +23,7 @@ dependencies:
 ```
 
 ## Usage
+Documentation <a href="https://becauseofprog.github.io/bitwise/">here</a>
 
 Better explained by example
 
