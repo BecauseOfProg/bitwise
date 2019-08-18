@@ -41,10 +41,16 @@ perms = Permissions.new(Permissions::READ, Permissions::WRITE)
 perms.has_perm Permissions::READ # true
 perms.has_perm Permissions::DELETE # false
 
-perms.to_i # 3 (bitwise value, easier to store)
+perms.add_perm Permissions::DELETE
+perms.has_perm Permissions::DELETE # true
+
+perms.del_perm Permissions::DELETE
+perms.has_perm Permissions::DELETE # false
+
+perms.to_i #=> 3 | (bitwise value, easier to store)
 
 perms2 = Permission.new(3)
-perms2.to_a # [0, 1]
+perms2.to_a #=> [0, 1] | (READ, WRITE)
 ```
 
 ## Contributing
