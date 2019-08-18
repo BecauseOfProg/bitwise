@@ -72,32 +72,36 @@
 
   <h2>Overview</h2>
 
-  <p>A library to handle permissions bitwisely
-Example:</p>
+  <p>A library to handle permissions bitwisely</p>
 
-<pre><code class="language-require "bitwise"">
-class Permissions &lt; Bitwise::Permissions
- READ = 0
- WRITE = 1
- EDIT = 2
- DELETE = 3
-end
+<p><span class="flag purple">NOTE</span>  More examples in the documentation</p>
 
-perms = Permissions.new(Permissions::READ, Permissions::WRITE)
+<pre><code class="language-crystal"><span class="k">require</span> <span class="s">&quot;bitwise&quot;</span>
 
-perms.has_perm Permissions::READ # true
-perms.has_perm Permissions::DELETE # false
+<span class="k">class</span> <span class="t">Permissions</span> <span class="o">&lt;</span> <span class="t">Bitwise</span><span class="t">::</span><span class="t">Permissions</span>
+ <span class="t">READ</span> <span class="o">=</span> <span class="n">0</span>
+ <span class="t">WRITE</span> <span class="o">=</span> <span class="n">1</span>
+ <span class="t">EDIT</span> <span class="o">=</span> <span class="n">2</span>
+ <span class="t">DELETE</span> <span class="o">=</span> <span class="n">3</span>
+<span class="k">end</span>
 
-perms.add_perm Permissions::DELETE
-perms.has_perm Permissions::DELETE # true
+perms <span class="o">=</span> <span class="t">Permissions</span>.<span class="k">new</span>(<span class="t">Permissions</span><span class="t">::</span><span class="t">READ</span>, <span class="t">Permissions</span><span class="t">::</span><span class="t">WRITE</span>)
 
-perms.del_perm Permissions::DELETE
-perms.has_perm Permissions::DELETE # false
+perms.has_perm <span class="t">Permissions</span><span class="t">::</span><span class="t">READ</span> <span class="c"># true</span>
+perms.has_perm <span class="t">Permissions</span><span class="t">::</span><span class="t">DELETE</span> <span class="c"># false</span>
 
-perms.to_i #=> 3 | (bitwise value, easier to store)
+perms.add_perm <span class="t">Permissions</span><span class="t">::</span><span class="t">DELETE</span>
+perms.has_perm <span class="t">Permissions</span><span class="t">::</span><span class="t">DELETE</span> <span class="c"># true</span>
 
-perms2 = Permission.new(3)
-perms2.to_a #=> [0, 1] | (READ, WRITE)</code></pre>
+perms.del_perm <span class="t">Permissions</span><span class="t">::</span><span class="t">DELETE</span>
+perms.has_perm <span class="t">Permissions</span><span class="t">::</span><span class="t">DELETE</span> <span class="c"># false</span>
+
+perms.to_i <span class="c">#=&gt; 3 | (bitwise value, easier to store)</span>
+
+perms2 <span class="o">=</span> <span class="t">Permission</span>.<span class="k">new</span>(<span class="n">3</span>)
+perms2.to_a <span class="c">#=&gt; [0, 1] | (READ, WRITE)</span>
+
+<span class="c"># More examples in the documentation</span></code></pre>
 
 
 
@@ -115,7 +119,7 @@ perms2.to_a #=> [0, 1] | (READ, WRITE)</code></pre>
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/BecauseOfProg/bitwise/blob/0b3c0bf4817a11ea69833cbbe4ee7d4279d0a534/src/bitwise/permissions.cr#L30" target="_blank">
+      <a href="https://github.com/BecauseOfProg/bitwise/blob/cd963199bc3efb48c9281751ee117f68ee742250/src/bitwise/permissions.cr#L34" target="_blank">
         bitwise/permissions.cr
       </a>
     
@@ -132,14 +136,14 @@ perms2.to_a #=> [0, 1] | (READ, WRITE)</code></pre>
       <li class="entry-summary">
         <a href="#new(bitwise:Int)-class-method" class="signature"><strong>.new</strong>(bitwise : Int)</a>
         
-          <div class="summary"><p>Create instance with bitwise value Example: <code></code>`require "bitwise"</p></div>
+          <div class="summary"><p>Create instance with bitwise value</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#new(*perms:Int)-class-method" class="signature"><strong>.new</strong>(*perms : Int)</a>
         
-          <div class="summary"><p>Create instance with permission constant Example: <code></code>`require "bitwise"</p></div>
+          <div class="summary"><p>Create instance with permission constant</p></div>
         
       </li>
     
@@ -153,37 +157,58 @@ perms2.to_a #=> [0, 1] | (READ, WRITE)</code></pre>
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#add_perm(perm:Int)-instance-method" class="signature"><strong>#add_perm</strong>(perm : Int)</a>
+        <a href="#add_perm(perm:Int,strict=false)-instance-method" class="signature"><strong>#add_perm</strong>(perm : Int, strict = <span class="n">false</span>)</a>
         
-          <div class="summary"><p>Add permission to instance Example: <code></code>`require "bitwise"</p></div>
+          <div class="summary"><p>Add permission to instance NOTE: Add strict: true if you want that the code raise an error if perm already added</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#add_perms(*perms:Int,strict=false)-instance-method" class="signature"><strong>#add_perms</strong>(*perms : Int, strict = <span class="n">false</span>)</a>
+        
+          <div class="summary"><p>Add multiple permissions to instance NOTE: Add strict: true if you want that the code raise an error if one perm is already added</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#bitwise:Int32-instance-method" class="signature"><strong>#bitwise</strong> : Int32</a>
         
-          <div class="summary"><p>Return bitwise value Example: <code></code>`require "bitwise"</p></div>
+          <div class="summary"><p>Return bitwise value Example: <code></code>`crystal require "bitwise"</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#bitwise_value:Int32-instance-method" class="signature"><strong>#bitwise_value</strong> : Int32</a>
         
-          <div class="summary"><p>Return bitwise value Example: <code></code>`require "bitwise"</p></div>
+          <div class="summary"><p>Return bitwise value Example: <code></code>`crystal require "bitwise"</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#del_perm(perm:Int)-instance-method" class="signature"><strong>#del_perm</strong>(perm : Int)</a>
+        <a href="#del_perm(perm:Int,strict=false)-instance-method" class="signature"><strong>#del_perm</strong>(perm : Int, strict = <span class="n">false</span>)</a>
         
-          <div class="summary"><p>Remove permission to instance Example: <code></code>`require "bitwise"</p></div>
+          <div class="summary"><p>Remove permission to instance NOTE: Add strict: true if you want that the code raise an error if perm already deleted</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#del_perms(*perms:Int,strict=false)-instance-method" class="signature"><strong>#del_perms</strong>(*perms : Int, strict = <span class="n">false</span>)</a>
+        
+          <div class="summary"><p>Remove multiple permissions to instance NOTE: Add strict: true if you want that the code raise an error if one perm is already deleted</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#has_perm(perm:Int)-instance-method" class="signature"><strong>#has_perm</strong>(perm : Int)</a>
         
-          <div class="summary"><p>Check if instance has the perm Example: <code></code>`require "bitwise"</p></div>
+          <div class="summary"><p>Check if instance has the perm</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#has_perms(*perms:Int)-instance-method" class="signature"><strong>#has_perms</strong>(*perms : Int)</a>
+        
+          <div class="summary"><p>Check if instance has all the perms</p></div>
         
       </li>
     
@@ -195,7 +220,7 @@ perms2.to_a #=> [0, 1] | (READ, WRITE)</code></pre>
       <li class="entry-summary">
         <a href="#to_i:Int32-instance-method" class="signature"><strong>#to_i</strong> : Int32</a>
         
-          <div class="summary"><p>Return bitwise value Example: <code></code>`require "bitwise"</p></div>
+          <div class="summary"><p>Return bitwise value Example: <code></code>`crystal require "bitwise"</p></div>
         
       </li>
     
@@ -240,23 +265,23 @@ perms2.to_a #=> [0, 1] | (READ, WRITE)</code></pre>
         <a class="method-permalink" href="#new(bitwise:Int)-class-method">#</a>
       </div>
       
-        <div class="doc"><p>Create instance with bitwise value
-Example:</p>
+        <div class="doc"><p>Create instance with bitwise value</p>
 
-<pre><code class="language-require "bitwise"">
-class Permissions &lt; Bitwise::Permissions
- READ = 0
- WRITE = 1
- EDIT = 2
- DELETE = 3
-end
+<pre><code class="language-crystal"><span class="k">require</span> <span class="s">&quot;bitwise&quot;</span>
 
-perms = Permissions.new(3) # Has perm READ and WRITE</code></pre></div>
+<span class="k">class</span> <span class="t">Permissions</span> <span class="o">&lt;</span> <span class="t">Bitwise</span><span class="t">::</span><span class="t">Permissions</span>
+ <span class="t">READ</span> <span class="o">=</span> <span class="n">0</span>
+ <span class="t">WRITE</span> <span class="o">=</span> <span class="n">1</span>
+ <span class="t">EDIT</span> <span class="o">=</span> <span class="n">2</span>
+ <span class="t">DELETE</span> <span class="o">=</span> <span class="n">3</span>
+<span class="k">end</span>
+
+perms <span class="o">=</span> <span class="t">Permissions</span>.<span class="k">new</span>(<span class="n">3</span>) <span class="c"># Has perm READ and WRITE</span></code></pre></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/BecauseOfProg/bitwise/blob/0b3c0bf4817a11ea69833cbbe4ee7d4279d0a534/src/bitwise/permissions.cr#L74" target="_blank">View source</a>]
+          [<a href="https://github.com/BecauseOfProg/bitwise/blob/cd963199bc3efb48c9281751ee117f68ee742250/src/bitwise/permissions.cr#L78" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -269,23 +294,23 @@ perms = Permissions.new(3) # Has perm READ and WRITE</code></pre></div>
         <a class="method-permalink" href="#new(*perms:Int)-class-method">#</a>
       </div>
       
-        <div class="doc"><p>Create instance with permission constant
-Example:</p>
+        <div class="doc"><p>Create instance with permission constant</p>
 
-<pre><code class="language-require "bitwise"">
-class Permissions &lt; Bitwise::Permissions
- READ = 0
- WRITE = 1
- EDIT = 2
- DELETE = 3
-end
+<pre><code class="language-crystal"><span class="k">require</span> <span class="s">&quot;bitwise&quot;</span>
 
-perms = Permissions.new(Permissions::READ, Permissions::WRITE) # Has perm READ and WRITE</code></pre></div>
+<span class="k">class</span> <span class="t">Permissions</span> <span class="o">&lt;</span> <span class="t">Bitwise</span><span class="t">::</span><span class="t">Permissions</span>
+ <span class="t">READ</span> <span class="o">=</span> <span class="n">0</span>
+ <span class="t">WRITE</span> <span class="o">=</span> <span class="n">1</span>
+ <span class="t">EDIT</span> <span class="o">=</span> <span class="n">2</span>
+ <span class="t">DELETE</span> <span class="o">=</span> <span class="n">3</span>
+<span class="k">end</span>
+
+perms <span class="o">=</span> <span class="t">Permissions</span>.<span class="k">new</span>(<span class="t">Permissions</span><span class="t">::</span><span class="t">READ</span>, <span class="t">Permissions</span><span class="t">::</span><span class="t">WRITE</span>) <span class="c"># Has perm READ and WRITE</span></code></pre></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/BecauseOfProg/bitwise/blob/0b3c0bf4817a11ea69833cbbe4ee7d4279d0a534/src/bitwise/permissions.cr#L45" target="_blank">View source</a>]
+          [<a href="https://github.com/BecauseOfProg/bitwise/blob/cd963199bc3efb48c9281751ee117f68ee742250/src/bitwise/permissions.cr#L50" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -297,33 +322,72 @@ perms = Permissions.new(Permissions::READ, Permissions::WRITE) # Has perm READ a
 
   <h2>Instance Method Detail</h2>
   
-    <div class="entry-detail" id="add_perm(perm:Int)-instance-method">
+    <div class="entry-detail" id="add_perm(perm:Int,strict=false)-instance-method">
       <div class="signature">
         
-        def <strong>add_perm</strong>(perm : Int)
+        def <strong>add_perm</strong>(perm : Int, strict = <span class="n">false</span>)
 
-        <a class="method-permalink" href="#add_perm(perm:Int)-instance-method">#</a>
+        <a class="method-permalink" href="#add_perm(perm:Int,strict=false)-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Add permission to instance
-Example:</p>
+        <div class="doc"><p>Add permission to instance</p>
 
-<pre><code class="language-require "bitwise"">
-class Permissions &lt; Bitwise::Permissions
- READ = 0
- WRITE = 1
- EDIT = 2
- DELETE = 3
-end
+<p><span class="flag purple">NOTE</span>  Add strict: true if you want that the code raise an error if perm already added</p>
 
-perms = Permissions.new(Permissions::READ, Permissions::WRITE)
+<pre><code class="language-crystal"><span class="k">require</span> <span class="s">&quot;bitwise&quot;</span>
 
-perms.add_perm Permissions::DELETE # Add the permission DELETE to the instance</code></pre></div>
+<span class="k">class</span> <span class="t">Permissions</span> <span class="o">&lt;</span> <span class="t">Bitwise</span><span class="t">::</span><span class="t">Permissions</span>
+ <span class="t">READ</span> <span class="o">=</span> <span class="n">0</span>
+ <span class="t">WRITE</span> <span class="o">=</span> <span class="n">1</span>
+ <span class="t">EDIT</span> <span class="o">=</span> <span class="n">2</span>
+ <span class="t">DELETE</span> <span class="o">=</span> <span class="n">3</span>
+<span class="k">end</span>
+
+perms <span class="o">=</span> <span class="t">Permissions</span>.<span class="k">new</span>(<span class="t">Permissions</span><span class="t">::</span><span class="t">READ</span>, <span class="t">Permissions</span><span class="t">::</span><span class="t">WRITE</span>)
+
+perms.add_perm <span class="t">Permissions</span><span class="t">::</span><span class="t">DELETE</span> <span class="c"># Add the permission DELETE to the instance</span>
+
+perms.add_perm <span class="t">Permissions</span><span class="t">::</span><span class="t">DELETE</span>, strict: <span class="n">true</span> <span class="c">#=&gt; ArgumentError(&quot;Perm already added&quot;)</span></code></pre></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/BecauseOfProg/bitwise/blob/0b3c0bf4817a11ea69833cbbe4ee7d4279d0a534/src/bitwise/permissions.cr#L127" target="_blank">View source</a>]
+          [<a href="https://github.com/BecauseOfProg/bitwise/blob/cd963199bc3efb48c9281751ee117f68ee742250/src/bitwise/permissions.cr#L162" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="add_perms(*perms:Int,strict=false)-instance-method">
+      <div class="signature">
+        
+        def <strong>add_perms</strong>(*perms : Int, strict = <span class="n">false</span>)
+
+        <a class="method-permalink" href="#add_perms(*perms:Int,strict=false)-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Add multiple permissions to instance</p>
+
+<p><span class="flag purple">NOTE</span>  Add strict: true if you want that the code raise an error if one perm is already added</p>
+
+<pre><code class="language-crystal"><span class="k">require</span> <span class="s">&quot;bitwise&quot;</span>
+
+<span class="k">class</span> <span class="t">Permissions</span> <span class="o">&lt;</span> <span class="t">Bitwise</span><span class="t">::</span><span class="t">Permissions</span>
+ <span class="t">READ</span> <span class="o">=</span> <span class="n">0</span>
+ <span class="t">WRITE</span> <span class="o">=</span> <span class="n">1</span>
+ <span class="t">EDIT</span> <span class="o">=</span> <span class="n">2</span>
+ <span class="t">DELETE</span> <span class="o">=</span> <span class="n">3</span>
+<span class="k">end</span>
+
+perms <span class="o">=</span> <span class="t">Permissions</span>.<span class="k">new</span>(<span class="t">Permissions</span><span class="t">::</span><span class="t">READ</span>, <span class="t">Permissions</span><span class="t">::</span><span class="t">WRITE</span>)
+
+perms.add_perms <span class="t">Permissions</span><span class="t">::</span><span class="t">EDIT</span>, <span class="t">Permissions</span><span class="t">::</span><span class="t">DELETE</span> <span class="c"># Add the permissions EDIT and DELETE to the instance</span>
+
+perms.add_perms <span class="t">Permissions</span><span class="t">::</span><span class="t">EDIT</span>, <span class="t">Permissions</span><span class="t">::</span><span class="t">DELETE</span>, strict: <span class="n">true</span> <span class="c">#=&gt; ArgumentError(&quot;Perm \&quot;2\&quot; already added&quot;)</span></code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/BecauseOfProg/bitwise/blob/cd963199bc3efb48c9281751ee117f68ee742250/src/bitwise/permissions.cr#L190" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -339,22 +403,23 @@ perms.add_perm Permissions::DELETE # Add the permission DELETE to the instance</
         <div class="doc"><p>Return bitwise value
 Example:</p>
 
-<pre><code class="language-require "bitwise"">
-class Permissions &lt; Bitwise::Permissions
- READ = 0
- WRITE = 1
- EDIT = 2
- DELETE = 3
-end
+<pre><code class="language-crystal"><span class="k">require</span> <span class="s">&quot;bitwise&quot;</span>
 
-perms = Permissions.new(Permissions::READ, Permissions::WRITE)
+<span class="k">class</span> <span class="t">Permissions</span> <span class="o">&lt;</span> <span class="t">Bitwise</span><span class="t">::</span><span class="t">Permissions</span>
+ <span class="t">READ</span> <span class="o">=</span> <span class="n">0</span>
+ <span class="t">WRITE</span> <span class="o">=</span> <span class="n">1</span>
+ <span class="t">EDIT</span> <span class="o">=</span> <span class="n">2</span>
+ <span class="t">DELETE</span> <span class="o">=</span> <span class="n">3</span>
+<span class="k">end</span>
 
-perms.bitwise #=> 3 # (bitwise value)</code></pre></div>
+perms <span class="o">=</span> <span class="t">Permissions</span>.<span class="k">new</span>(<span class="t">Permissions</span><span class="t">::</span><span class="t">READ</span>, <span class="t">Permissions</span><span class="t">::</span><span class="t">WRITE</span>)
+
+perms.bitwise <span class="c">#=&gt; 3 # (bitwise value)</span></code></pre></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/BecauseOfProg/bitwise/blob/0b3c0bf4817a11ea69833cbbe4ee7d4279d0a534/src/bitwise/permissions.cr#L194" target="_blank">View source</a>]
+          [<a href="https://github.com/BecauseOfProg/bitwise/blob/cd963199bc3efb48c9281751ee117f68ee742250/src/bitwise/permissions.cr#L299" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -370,53 +435,93 @@ perms.bitwise #=> 3 # (bitwise value)</code></pre></div>
         <div class="doc"><p>Return bitwise value
 Example:</p>
 
-<pre><code class="language-require "bitwise"">
-class Permissions &lt; Bitwise::Permissions
- READ = 0
- WRITE = 1
- EDIT = 2
- DELETE = 3
-end
+<pre><code class="language-crystal"><span class="k">require</span> <span class="s">&quot;bitwise&quot;</span>
 
-perms = Permissions.new(Permissions::READ, Permissions::WRITE)
+<span class="k">class</span> <span class="t">Permissions</span> <span class="o">&lt;</span> <span class="t">Bitwise</span><span class="t">::</span><span class="t">Permissions</span>
+ <span class="t">READ</span> <span class="o">=</span> <span class="n">0</span>
+ <span class="t">WRITE</span> <span class="o">=</span> <span class="n">1</span>
+ <span class="t">EDIT</span> <span class="o">=</span> <span class="n">2</span>
+ <span class="t">DELETE</span> <span class="o">=</span> <span class="n">3</span>
+<span class="k">end</span>
 
-perms.bitwise_value #=> 3 # (bitwise value)</code></pre></div>
+perms <span class="o">=</span> <span class="t">Permissions</span>.<span class="k">new</span>(<span class="t">Permissions</span><span class="t">::</span><span class="t">READ</span>, <span class="t">Permissions</span><span class="t">::</span><span class="t">WRITE</span>)
+
+perms.bitwise_value <span class="c">#=&gt; 3 # (bitwise value)</span></code></pre></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/BecauseOfProg/bitwise/blob/0b3c0bf4817a11ea69833cbbe4ee7d4279d0a534/src/bitwise/permissions.cr#L213" target="_blank">View source</a>]
+          [<a href="https://github.com/BecauseOfProg/bitwise/blob/cd963199bc3efb48c9281751ee117f68ee742250/src/bitwise/permissions.cr#L319" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="del_perm(perm:Int)-instance-method">
+    <div class="entry-detail" id="del_perm(perm:Int,strict=false)-instance-method">
       <div class="signature">
         
-        def <strong>del_perm</strong>(perm : Int)
+        def <strong>del_perm</strong>(perm : Int, strict = <span class="n">false</span>)
 
-        <a class="method-permalink" href="#del_perm(perm:Int)-instance-method">#</a>
+        <a class="method-permalink" href="#del_perm(perm:Int,strict=false)-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Remove permission to instance
-Example:</p>
+        <div class="doc"><p>Remove permission to instance</p>
 
-<pre><code class="language-require "bitwise"">
-class Permissions &lt; Bitwise::Permissions
- READ = 0
- WRITE = 1
- EDIT = 2
- DELETE = 3
-end
+<p><span class="flag purple">NOTE</span>  Add strict: true if you want that the code raise an error if perm already deleted</p>
 
-perms = Permissions.new(Permissions::READ, Permissions::WRITE)
+<pre><code class="language-crystal"><span class="k">require</span> <span class="s">&quot;bitwise&quot;</span>
 
-perms.del_perm Permissions::WRITE # Remove the permission WRITE to the instance</code></pre></div>
+<span class="k">class</span> <span class="t">Permissions</span> <span class="o">&lt;</span> <span class="t">Bitwise</span><span class="t">::</span><span class="t">Permissions</span>
+ <span class="t">READ</span> <span class="o">=</span> <span class="n">0</span>
+ <span class="t">WRITE</span> <span class="o">=</span> <span class="n">1</span>
+ <span class="t">EDIT</span> <span class="o">=</span> <span class="n">2</span>
+ <span class="t">DELETE</span> <span class="o">=</span> <span class="n">3</span>
+<span class="k">end</span>
+
+perms <span class="o">=</span> <span class="t">Permissions</span>.<span class="k">new</span>(<span class="t">Permissions</span><span class="t">::</span><span class="t">READ</span>, <span class="t">Permissions</span><span class="t">::</span><span class="t">WRITE</span>)
+
+perms.del_perm <span class="t">Permissions</span><span class="t">::</span><span class="t">WRITE</span> <span class="c"># Remove the permission WRITE to the instance</span>
+
+perms.del_perm <span class="t">Permissions</span><span class="t">::</span><span class="t">WRITE</span>, strict: <span class="n">true</span> <span class="c">#=&gt; ArgumentError(&quot;Instance doesn&#39;t have this perm&quot;)</span></code></pre></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/BecauseOfProg/bitwise/blob/0b3c0bf4817a11ea69833cbbe4ee7d4279d0a534/src/bitwise/permissions.cr#L149" target="_blank">View source</a>]
+          [<a href="https://github.com/BecauseOfProg/bitwise/blob/cd963199bc3efb48c9281751ee117f68ee742250/src/bitwise/permissions.cr#L220" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="del_perms(*perms:Int,strict=false)-instance-method">
+      <div class="signature">
+        
+        def <strong>del_perms</strong>(*perms : Int, strict = <span class="n">false</span>)
+
+        <a class="method-permalink" href="#del_perms(*perms:Int,strict=false)-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Remove multiple permissions to instance</p>
+
+<p><span class="flag purple">NOTE</span>  Add strict: true if you want that the code raise an error if one perm is already deleted</p>
+
+<pre><code class="language-crystal"><span class="k">require</span> <span class="s">&quot;bitwise&quot;</span>
+
+<span class="k">class</span> <span class="t">Permissions</span> <span class="o">&lt;</span> <span class="t">Bitwise</span><span class="t">::</span><span class="t">Permissions</span>
+ <span class="t">READ</span> <span class="o">=</span> <span class="n">0</span>
+ <span class="t">WRITE</span> <span class="o">=</span> <span class="n">1</span>
+ <span class="t">EDIT</span> <span class="o">=</span> <span class="n">2</span>
+ <span class="t">DELETE</span> <span class="o">=</span> <span class="n">3</span>
+<span class="k">end</span>
+
+perms <span class="o">=</span> <span class="t">Permissions</span>.<span class="k">new</span>(<span class="t">Permissions</span><span class="t">::</span><span class="t">READ</span>, <span class="t">Permissions</span><span class="t">::</span><span class="t">WRITE</span>)
+
+perms.del_perm <span class="t">Permissions</span><span class="t">::</span><span class="t">READ</span>, <span class="t">Permissions</span><span class="t">::</span><span class="t">WRITE</span> <span class="c"># Remove the permission WRITE to the instance</span>
+
+perms.del_perm <span class="t">Permissions</span><span class="t">::</span><span class="t">READ</span>, <span class="t">Permissions</span><span class="t">::</span><span class="t">WRITE</span>, strict: <span class="n">true</span> <span class="c">#=&gt; ArgumentError(&quot;Instance doesn&#39;t have the perm\&quot;0\&quot;&quot;)</span></code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/BecauseOfProg/bitwise/blob/cd963199bc3efb48c9281751ee117f68ee742250/src/bitwise/permissions.cr#L248" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -429,26 +534,58 @@ perms.del_perm Permissions::WRITE # Remove the permission WRITE to the instance<
         <a class="method-permalink" href="#has_perm(perm:Int)-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Check if instance has the perm
-Example:</p>
+        <div class="doc"><p>Check if instance has the perm</p>
 
-<pre><code class="language-require "bitwise"">
-class Permissions &lt; Bitwise::Permissions
- READ = 0
- WRITE = 1
- EDIT = 2
- DELETE = 3
-end
+<pre><code class="language-crystal"><span class="k">require</span> <span class="s">&quot;bitwise&quot;</span>
 
-perms = Permissions.new(Permissions::READ, Permissions::WRITE)
+<span class="k">class</span> <span class="t">Permissions</span> <span class="o">&lt;</span> <span class="t">Bitwise</span><span class="t">::</span><span class="t">Permissions</span>
+ <span class="t">READ</span> <span class="o">=</span> <span class="n">0</span>
+ <span class="t">WRITE</span> <span class="o">=</span> <span class="n">1</span>
+ <span class="t">EDIT</span> <span class="o">=</span> <span class="n">2</span>
+ <span class="t">DELETE</span> <span class="o">=</span> <span class="n">3</span>
+<span class="k">end</span>
 
-perms.has_perm Permissions::READ # true
-perms.has_perm Permissions::DELETE # false```</code></pre></div>
+perms <span class="o">=</span> <span class="t">Permissions</span>.<span class="k">new</span>(<span class="t">Permissions</span><span class="t">::</span><span class="t">READ</span>, <span class="t">Permissions</span><span class="t">::</span><span class="t">WRITE</span>)
+
+perms.has_perm <span class="t">Permissions</span><span class="t">::</span><span class="t">READ</span> <span class="c"># true</span>
+perms.has_perm <span class="t">Permissions</span><span class="t">::</span><span class="t">DELETE</span> <span class="c"># false```</span></code></pre></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/BecauseOfProg/bitwise/blob/0b3c0bf4817a11ea69833cbbe4ee7d4279d0a534/src/bitwise/permissions.cr#L104" target="_blank">View source</a>]
+          [<a href="https://github.com/BecauseOfProg/bitwise/blob/cd963199bc3efb48c9281751ee117f68ee742250/src/bitwise/permissions.cr#L109" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="has_perms(*perms:Int)-instance-method">
+      <div class="signature">
+        
+        def <strong>has_perms</strong>(*perms : Int)
+
+        <a class="method-permalink" href="#has_perms(*perms:Int)-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Check if instance has all the perms</p>
+
+<pre><code class="language-crystal"><span class="k">require</span> <span class="s">&quot;bitwise&quot;</span>
+
+<span class="k">class</span> <span class="t">Permissions</span> <span class="o">&lt;</span> <span class="t">Bitwise</span><span class="t">::</span><span class="t">Permissions</span>
+ <span class="t">READ</span> <span class="o">=</span> <span class="n">0</span>
+ <span class="t">WRITE</span> <span class="o">=</span> <span class="n">1</span>
+ <span class="t">EDIT</span> <span class="o">=</span> <span class="n">2</span>
+ <span class="t">DELETE</span> <span class="o">=</span> <span class="n">3</span>
+<span class="k">end</span>
+
+perms <span class="o">=</span> <span class="t">Permissions</span>.<span class="k">new</span>(<span class="t">Permissions</span><span class="t">::</span><span class="t">READ</span>, <span class="t">Permissions</span><span class="t">::</span><span class="t">WRITE</span>)
+
+perms.has_perms <span class="t">Permissions</span><span class="t">::</span><span class="t">READ</span>, <span class="t">Permission</span><span class="t">::</span><span class="t">WRITE</span> <span class="c">#=&gt; true</span>
+perms.has_perms <span class="t">Permissions</span><span class="t">::</span><span class="t">READ</span>, <span class="t">Permissions</span><span class="t">::</span><span class="t">DELETE</span> <span class="c">#=&gt; false```</span></code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/BecauseOfProg/bitwise/blob/cd963199bc3efb48c9281751ee117f68ee742250/src/bitwise/permissions.cr#L133" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -464,7 +601,7 @@ perms.has_perm Permissions::DELETE # false```</code></pre></div>
       <br/>
       <div>
         
-          [<a href="https://github.com/BecauseOfProg/bitwise/blob/0b3c0bf4817a11ea69833cbbe4ee7d4279d0a534/src/bitwise/permissions.cr#L217" target="_blank">View source</a>]
+          [<a href="https://github.com/BecauseOfProg/bitwise/blob/cd963199bc3efb48c9281751ee117f68ee742250/src/bitwise/permissions.cr#L323" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -480,22 +617,23 @@ perms.has_perm Permissions::DELETE # false```</code></pre></div>
         <div class="doc"><p>Return bitwise value
 Example:</p>
 
-<pre><code class="language-require "bitwise"">
-class Permissions &lt; Bitwise::Permissions
- READ = 0
- WRITE = 1
- EDIT = 2
- DELETE = 3
-end
+<pre><code class="language-crystal"><span class="k">require</span> <span class="s">&quot;bitwise&quot;</span>
 
-perms = Permissions.new(Permissions::READ, Permissions::WRITE)
+<span class="k">class</span> <span class="t">Permissions</span> <span class="o">&lt;</span> <span class="t">Bitwise</span><span class="t">::</span><span class="t">Permissions</span>
+ <span class="t">READ</span> <span class="o">=</span> <span class="n">0</span>
+ <span class="t">WRITE</span> <span class="o">=</span> <span class="n">1</span>
+ <span class="t">EDIT</span> <span class="o">=</span> <span class="n">2</span>
+ <span class="t">DELETE</span> <span class="o">=</span> <span class="n">3</span>
+<span class="k">end</span>
 
-perms.to_i #=> 3 # (bitwise value)</code></pre></div>
+perms <span class="o">=</span> <span class="t">Permissions</span>.<span class="k">new</span>(<span class="t">Permissions</span><span class="t">::</span><span class="t">READ</span>, <span class="t">Permissions</span><span class="t">::</span><span class="t">WRITE</span>)
+
+perms.to_i <span class="c">#=&gt; 3 # (bitwise value)</span></code></pre></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/BecauseOfProg/bitwise/blob/0b3c0bf4817a11ea69833cbbe4ee7d4279d0a534/src/bitwise/permissions.cr#L171" target="_blank">View source</a>]
+          [<a href="https://github.com/BecauseOfProg/bitwise/blob/cd963199bc3efb48c9281751ee117f68ee742250/src/bitwise/permissions.cr#L275" target="_blank">View source</a>]
         
       </div>
     </div>
